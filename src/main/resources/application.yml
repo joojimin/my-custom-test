@@ -1,0 +1,14 @@
+server:
+  port: 9090
+
+spring:
+  profiles:
+    active: local
+    group:
+      "local": "console-logging"
+      "dev" : "console-logging, file-info-logging, file-error-logging"
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+

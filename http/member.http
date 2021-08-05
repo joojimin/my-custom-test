@@ -1,0 +1,14 @@
+###
+GET {{host}}/members
+###
+
+
+###
+POST {{host}}/member
+Content-Type: application/json
+
+{
+  "name": "주지민",
+  "address": "구로구",
+  "age": 31
+}
