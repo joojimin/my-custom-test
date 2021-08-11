@@ -12,3 +12,7 @@ Content-Type: application/json
   "address": "구로구",
   "age": 31
 }
+
+###
+GET {{host}}/member/type/FIRST
+###

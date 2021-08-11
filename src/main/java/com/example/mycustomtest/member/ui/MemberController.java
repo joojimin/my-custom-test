@@ -7,9 +7,9 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -21,6 +21,11 @@ public class MemberController {
     @GetMapping("/members")
     public ResponseEntity<List<MemberResponse>> getMembers() {
         return ResponseEntity.ok(memberService.getMembers());
+    }
+
+    @GetMapping("/member/{id}")
+    public ResponseEntity<MemberResponse> getMember(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(memberService.getMember(id));
     }
 
     @PostMapping("/member")

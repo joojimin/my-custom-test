@@ -1,10 +1,12 @@
 package com.example.mycustomtest.member.dto;
 
 import com.example.mycustomtest.member.domain.Member;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 public class MemberRequest {
 
