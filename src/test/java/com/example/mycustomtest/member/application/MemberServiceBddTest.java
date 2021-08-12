@@ -2,7 +2,7 @@ package com.example.mycustomtest.member.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.mockito.Mockito.times;
+import static org.mockito.ArgumentMatchers.any;
 
 import com.example.mycustomtest.member.domain.Member;
 import com.example.mycustomtest.member.dto.MemberRequest;
@@ -13,13 +13,13 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class MemberServiceTest {
+public class MemberServiceBddTest {
 
     @Mock
     MemberRepository memberRepository;
@@ -32,8 +32,8 @@ class MemberServiceTest {
     @Test
     void getMembersTest() {
         // given
-        Mockito.when(memberRepository.findAll()).thenReturn(List.of(Member.builder().name("주지민").age(30).address("구로구").build(),
-                                                                    Member.builder().name("주지민").age(31).address("광진구").build()));
+        BDDMockito.given(memberRepository.findAll()).willReturn(List.of(Member.builder().name("주지민").age(30).address("구로구").build(),
+                                                                        Member.builder().name("주지민").age(31).address("광진구").build()));
 
         // when
         List<MemberResponse> actual = memberService.getMembers();
@@ -44,7 +44,7 @@ class MemberServiceTest {
                           .contains(tuple("주지민",30,"구로구"),
                                     tuple("주지민",31,"광진구"));
 
-        Mockito.verify(memberRepository, times(1)).findAll();
+        BDDMockito.then(memberRepository).should(BDDMockito.times(1)).findAll();
     }
 
     @DisplayName("멤버 저장")
@@ -52,7 +52,7 @@ class MemberServiceTest {
     void saveMemberTest() {
         // given
         MemberRequest memberRequest = new MemberRequest("주지민", 30, "구로구");
-        Mockito.when(memberRepository.save(Mockito.any())).thenReturn(Member.builder()
+        BDDMockito.given(memberRepository.save(BDDMockito.any())).willReturn(Member.builder()
                                                                             .name("주지민")
                                                                             .age(30)
                                                                             .address("구로구")
@@ -68,5 +68,7 @@ class MemberServiceTest {
             assertThat(actual.getAge()).isEqualTo(30);
             assertThat(actual.getAddress()).isEqualTo("구로구");
         });
+
+        BDDMockito.then(memberRepository).should().save(any());
     }
 }
