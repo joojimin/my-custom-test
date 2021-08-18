@@ -4,13 +4,14 @@ import com.example.mycustomtest.member.domain.Member;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
 public class MemberRequest {
 
-    private String name;
+    @Setter private String name;
     private int age;
     private String address;
 

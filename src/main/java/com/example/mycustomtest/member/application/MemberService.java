@@ -38,4 +38,9 @@ public class MemberService {
     public MemberResponse saveMember(final MemberRequest request) {
         return MemberResponse.createMemberResponse(memberRepository.save(request.createMember()));
     }
+
+    public MemberResponse saveCaptorTest(final MemberRequest request, final MemberRequest test) {
+        test.setName("asdasd");
+        return MemberResponse.createMemberResponse(memberRepository.save(request.createMember()));
+    }
 }
