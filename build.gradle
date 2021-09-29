@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.flywaydb.flyway" version "6.4.4"
     id 'java'
 }
 
@@ -27,8 +28,10 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core:3.20.2'
+    testImplementation 'com.wix:wix-embedded-mysql:4.6.1'
 }
 
 test {

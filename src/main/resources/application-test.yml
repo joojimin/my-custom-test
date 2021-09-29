@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:13306/test?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&profileSQL=true&maxQuerySizeToLog=999999&logger=Slf4JLogger
+    username: test
+    password: test1234
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
