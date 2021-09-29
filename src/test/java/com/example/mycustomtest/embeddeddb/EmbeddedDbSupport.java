@@ -9,6 +9,7 @@ import com.wix.mysql.config.MysqldConfig;
 import java.time.ZoneId;
 import java.util.TimeZone;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,12 +37,12 @@ public abstract class EmbeddedDbSupport {
         server = EmbeddedMysql.anEmbeddedMysql(config)
                               .addSchema("test")
                               .start();
-//        initSchema();
+        initSchema();
     }
 
     private static void initSchema() {
 
-        var config = Flyway.configure().dataSource(DB_URL, USER, KEY);
+        FluentConfiguration config = Flyway.configure().dataSource(DB_URL, USER, KEY);
         Flyway flyway = new Flyway(config);
         flyway.migrate();
     }

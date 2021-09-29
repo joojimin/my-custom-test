@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Disabled
-public class MemberEmbeddedSupport extends EmbeddedDbSupport {
+public class SimpleMemberTest extends EmbeddedDbSupport {
 
     @Autowired
     private MemberRepository memberRepository;

@@ -1,4 +1,4 @@
-create table member (
+create table `member_info` (
     `id` bigint not null AUTO_INCREMENT,
     `address` varchar(255) not null,
     `age` int not null,
