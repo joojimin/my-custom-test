@@ -8,8 +8,6 @@ import com.wix.mysql.config.Charset;
 import com.wix.mysql.config.MysqldConfig;
 import java.time.ZoneId;
 import java.util.TimeZone;
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("test")
 public abstract class EmbeddedDbSupport {
 
-    public static final String DB_URL = "jdbc:mysql://127.0.0.1:13306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&useSSL=true&verifyServerCertificate=false";
-    private static EmbeddedMysql server;
-    private static String USER = "test";
-    private static String KEY = "test1234";
+    private static final EmbeddedMysql server;
+    private static final String USER = "test";
+    private static final String KEY = "test1234";
+    private static final int PORT = 13306;
 
     static {
         MysqldConfig config = aMysqldConfig(v8_0_17)
             .withCharset(Charset.aCharset("utf8mb4", "utf8mb4_bin"))
-            .withPort(13306)
+            .withPort(PORT)
             .withUser(USER, KEY)
             .withTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
             .withServerVariable("sql_mode", "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION")
@@ -37,13 +35,5 @@ public abstract class EmbeddedDbSupport {
         server = EmbeddedMysql.anEmbeddedMysql(config)
                               .addSchema("test")
                               .start();
-        initSchema();
-    }
-
-    private static void initSchema() {
-
-        FluentConfiguration config = Flyway.configure().dataSource(DB_URL, USER, KEY);
-        Flyway flyway = new Flyway(config);
-        flyway.migrate();
     }
 }

@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import com.example.mycustomtest.member.domain.Member;
 import com.example.mycustomtest.member.infrastructure.MemberRepository;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
